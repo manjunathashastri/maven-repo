@@ -10,11 +10,11 @@ pipeline {
         }
         stages('maven_build'){
             steps {
-                sh mvn clean package
+                sh 'mvn clean package'
             }
         }
-        stage('deploy_tomcate'){
-            sshagent('tomcat'){
+        stage('Deploy_Tomca'){
+            sshagent('Tomcat-Deployment-server'){
                 sh "scp -scp -o StrictHostKeyChecking=no  target/maven-web-application.war  ec2-user@52.66.196.158:/opt/tomcat9/webapps"
             }
         }
