@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'slave' }
         tools{
-   maven 'maven_test'
+   maven 'maven-test'
 }
     stages{
         stage('checkout _scm'){
