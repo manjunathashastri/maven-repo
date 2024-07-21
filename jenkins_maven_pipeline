@@ -1,19 +1,21 @@
 pipeline {
-    angent any 
+    angent {label 'slave' }
+        tools{
+   maven 'maven_test'
     stages{
-        stage('checkout'){
+        stage('checkout _scm'){
             steps {
                 checkout scm
             }
         }
-        stages('maven'){
+        stages('maven_build'){
             steps {
-                sh maven
+                sh mvn clean package
             }
         }
         stage('deploy_tomcate'){
-            sshagen('tomcat'){
-                sh "scp -"
+            sshagent('tomcat'){
+                sh "scp -scp -o StrictHostKeyChecking=no  target/maven-web-application.war  ec2-user@52.66.196.158:/opt/tomcat9/webapps"
             }
         }
     }
