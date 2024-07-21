@@ -1,0 +1,20 @@
+pipeline {
+    angent any 
+    stages{
+        stage('checkout'){
+            steps {
+                checkout scm
+            }
+        }
+        stages('maven'){
+            steps {
+                sh maven
+            }
+        }
+        stage('deploy_tomcate'){
+            sshagen('tomcat'){
+                sh "scp -"
+            }
+        }
+    }
+}
